@@ -1,6 +1,3 @@
-import { HomeServerApi } from './matrix/net/HomeServerApi.js';
-
-
 export function loadOrLoginHandler(navigation, sessionInfo) {
     console.log(sessionInfo);
     /*
@@ -11,16 +8,8 @@ export function loadOrLoginHandler(navigation, sessionInfo) {
         lastUsed
         userId
     */
-    // const hsApi = new HomeServerApi({
-    //     homeServer: sessionInfo.homeServer,
-    //     accessToken: sessionInfo.accessToken,
-    //     // request,
-    //     // reconnector,
-    // });
-    // console.log(hsApi);
-    // hsApi.getDisplayName(null, 'f.brodbeck'/* sessionInfo.userId */)
     fetch(
-        `https://medienhaus.udk-berlin.de/_matrix/client/r0/profile/${sessionInfo.userId}/displayname`,
+        `${sessionInfo.homeServer}/_matrix/client/r0/profile/${sessionInfo.userId}/displayname`,
         {
             headers: {
                 authorization: `Bearer ${sessionInfo.accessToken}`
