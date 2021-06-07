@@ -19,6 +19,7 @@ import {SessionLoadViewModel} from "./SessionLoadViewModel.js";
 import {LoginViewModel} from "./LoginViewModel.js";
 import {SessionPickerViewModel} from "./SessionPickerViewModel.js";
 import {ViewModel} from "./ViewModel.js";
+import { loadOrLoginHandler } from "../teacher-solar.js";
 
 export class RootViewModel extends ViewModel {
     constructor(options) {
@@ -73,6 +74,7 @@ export class RootViewModel extends ViewModel {
                         this.navigation.push("login");
                     } else if (sessionInfos.length === 1) {
                         this.navigation.push("session", sessionInfos[0].id);
+                        loadOrLoginHandler(this.navigation);
                     } else {
                         this.navigation.push("session");
                     }
@@ -104,12 +106,14 @@ export class RootViewModel extends ViewModel {
                     // but we also want the change of screen to go through the navigation
                     // so we store the session container in a temporary variable that will be
                     // consumed by _applyNavigation, triggered by the navigation change
-                    // 
+                    //
                     // Also, we should not call _setSection before the navigation is in the correct state,
                     // as url creation (e.g. in RoomTileViewModel)
                     // won't be using the correct navigation base path.
                     this._pendingSessionContainer = sessionContainer;
                     this.navigation.push("session", sessionContainer.sessionId);
+
+                    loadOrLoginHandler(this.navigation);
                 },
             }));
         });
