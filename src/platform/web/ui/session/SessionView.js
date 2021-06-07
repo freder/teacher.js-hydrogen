@@ -35,7 +35,7 @@ export class SessionView extends TemplateView {
             },
         }, [
             t.view(new SessionStatusView(vm.sessionStatusViewModel)),
-            t.view(new LeftPanelView(vm.leftPanelViewModel)),
+            // t.view(new LeftPanelView(vm.leftPanelViewModel)),
             t.mapView(vm => vm.activeMiddleViewModel, () => {
                 if (vm.roomGridViewModel) {
                     return new RoomGridView(vm.roomGridViewModel);
