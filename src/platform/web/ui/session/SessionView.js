@@ -50,7 +50,7 @@ export class SessionView extends TemplateView {
                         return new UnknownRoomView(vm.currentRoomViewModel);
                     }
                 } else {
-                    return new StaticView(t => t.div({className: "room-placeholder"}, t.h2(vm.i18n`Choose a room on the left side.`)));
+                    // return new StaticView(t => t.div({className: "room-placeholder"}, t.h2(vm.i18n`Choose a room on the left side.`)));
                 }
             }),
             t.mapView(vm => vm.lightboxViewModel, lightboxViewModel => lightboxViewModel ? new LightboxView(lightboxViewModel) : null)
