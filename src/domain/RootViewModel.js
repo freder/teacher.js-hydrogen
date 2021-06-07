@@ -74,7 +74,7 @@ export class RootViewModel extends ViewModel {
                         this.navigation.push("login");
                     } else if (sessionInfos.length === 1) {
                         this.navigation.push("session", sessionInfos[0].id);
-                        loadOrLoginHandler(this.navigation);
+                        loadOrLoginHandler(this.navigation, sessionInfos[0]);
                     } else {
                         this.navigation.push("session");
                     }
@@ -113,7 +113,7 @@ export class RootViewModel extends ViewModel {
                     this._pendingSessionContainer = sessionContainer;
                     this.navigation.push("session", sessionContainer.sessionId);
 
-                    loadOrLoginHandler(this.navigation);
+                    loadOrLoginHandler(this.navigation, sessionContainer);
                 },
             }));
         });
