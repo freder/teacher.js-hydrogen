@@ -32,7 +32,7 @@ const serve = serveStatic(
 		index: ['index.html', 'index.htm']
 	}
 );
- 
+
 // Create server
 const server = http.createServer(function onRequest (req, res) {
     console.log(req.method, req.url);
@@ -40,4 +40,4 @@ const server = http.createServer(function onRequest (req, res) {
 });
 
 // Listen
-server.listen(3000);
+server.listen(3001);
