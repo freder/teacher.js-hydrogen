@@ -1,5 +1,5 @@
 export function loadOrLoginHandler(navigation, sessionInfo) {
-    console.log(sessionInfo);
+    // console.log(sessionInfo);
     /*
         accessToken
         deviceId
@@ -18,8 +18,8 @@ export function loadOrLoginHandler(navigation, sessionInfo) {
     )
         .then((res) => res.json())
         .then(({ displayname }) => {
-            // console.log(displayname);
-            window.postMessage(
+            window.parent.postMessage(
+            // window.top.postMessage(
                 {
                     type: 'HYDROGEN_READY',
                     payload: {
@@ -33,11 +33,10 @@ export function loadOrLoginHandler(navigation, sessionInfo) {
             console.error(err);
         });
 
-    // directly go to a specific room
-    // TODO: receive room id from parent window
+    // receive room id from parent window + load it
     window.addEventListener('message', ({ data }) => {
-        console.log(data);
+        if (data.type === 'HYDROGEN_LOAD_ROOM') {
+            navigation.push('room', data.payload.roomId);
+        }
     });
-    const roomId = '!MnnWYJyaHwOLoMoWZV:m3x.baumhaus.digital';
-    navigation.push('room', roomId);
 }
