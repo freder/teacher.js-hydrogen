@@ -25,6 +25,7 @@ export function loadOrLoginHandler(navigation, sessionInfo) {
                 {
                     type: 'HYDROGEN_READY',
                     payload: {
+                        userId: sessionInfo.userId,
                         displayName: displayname
                     }
                 },
