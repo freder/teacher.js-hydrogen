@@ -113,7 +113,12 @@ export class RootViewModel extends ViewModel {
                     this._pendingSessionContainer = sessionContainer;
                     this.navigation.push("session", sessionContainer.sessionId);
 
-                    loadOrLoginHandler(this.navigation, sessionContainer);
+                    // TODO: there must be a better way
+                    const sessionInfoStr = localStorage.getItem(
+                        sessionContainer._platform.sessionInfoStorage._name
+                    );
+                    const sessionInfo = JSON.parse(sessionInfoStr)[0];
+                    loadOrLoginHandler(this.navigation, sessionInfo);
                 },
             }));
         });
