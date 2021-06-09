@@ -18,6 +18,9 @@ import {TemplateView} from "../general/TemplateView.js";
 import {hydrogenGithubLink} from "./common.js";
 import {SessionLoadStatusView} from "./SessionLoadStatusView.js";
 
+import { defaultHomeServer } from '../../../../teacher-solar.js';
+
+
 export class LoginView extends TemplateView {
     render(t, vm) {
         const disabled = vm => !!vm.isBusy;
@@ -37,14 +40,15 @@ export class LoginView extends TemplateView {
             id: "homeserver",
             type: "text",
             placeholder: vm.i18n`Your matrix homeserver`,
-            value: vm.defaultHomeServer, 
+            value: /* vm. */defaultHomeServer,
             disabled
         });
-        
+
         return t.div({className: "PreSessionScreen"}, [
             t.div({className: "logo"}),
             t.div({className: "LoginView form"}, [
-                t.h1([vm.i18n`Sign In`]),
+                // t.h1([vm.i18n`Sign In`]),
+                t.h1([vm.i18n`Sign in with your Matrix account`]),
                 t.if(vm => vm.error, t => t.div({className: "error"}, vm => vm.error)),
                 t.form({
                     onSubmit: evnt => {

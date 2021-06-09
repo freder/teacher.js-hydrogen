@@ -1,3 +1,6 @@
+export const defaultHomeServer = 'medienhaus.udk-berlin.de';
+
+
 export function loadOrLoginHandler(navigation, sessionInfo) {
     // console.log(sessionInfo);
     /*
