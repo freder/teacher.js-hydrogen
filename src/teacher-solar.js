@@ -3,12 +3,13 @@ export const defaultHomeServer = 'medienhaus.udk-berlin.de';
 
 export function loadOrLoginHandler(navigation, sessionInfo) {
     /*
-        accessToken
-        deviceId
-        homeServer
-        id
-        lastUsed
-        userId
+        sessionInfo:
+        - accessToken
+        - deviceId
+        - homeServer
+        - id
+        - lastUsed
+        - userId
     */
     fetch(
         `${sessionInfo.homeServer}/_matrix/client/r0/profile/${sessionInfo.userId}/displayname`,
