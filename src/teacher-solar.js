@@ -1,7 +1,10 @@
+import { HomeServerApi } from "./matrix/net/HomeServerApi.js";
+
+
 export const defaultHomeServer = 'medienhaus.udk-berlin.de';
 
 
-export function loadOrLoginHandler(navigation, sessionInfo) {
+export function loadOrLoginHandler(navigation, sessionInfo, platform) {
     /*
         sessionInfo:
         - accessToken
@@ -41,6 +44,29 @@ export function loadOrLoginHandler(navigation, sessionInfo) {
     window.addEventListener('message', ({ data }) => {
         if (data.type === 'HYDROGEN_LOAD_ROOM') {
             navigation.push('room', data.payload.roomId);
+        }
+    });
+
+    const hsApi = new HomeServerApi({
+        homeServer: sessionInfo.homeServer,
+        accessToken: sessionInfo.accessToken,
+        request: platform.request,
+    });
+
+    // receive a message to send to chat
+    window.addEventListener('message', ({ data }) => {
+        if (data.type === 'HYDROGEN_SEND_MESSAGE') {
+            const { roomId, content } = data.payload;
+            const eventType = 'm.room.message';
+            const txnId = undefined; // transaction id
+            const options = null;
+            hsApi.send(
+                roomId,
+                eventType,
+                txnId,
+                { msgtype: 'm.text', body: content },
+                options
+            );
         }
     });
 }
