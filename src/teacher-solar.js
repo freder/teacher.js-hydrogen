@@ -40,17 +40,17 @@ export function loadOrLoginHandler(navigation, sessionInfo, platform) {
             console.error(err);
         });
 
+    const hsApi = new HomeServerApi({
+        homeServer: sessionInfo.homeServer,
+        accessToken: sessionInfo.accessToken,
+        request: platform.request,
+    });
+
     // receive room id from parent window + load it
     window.addEventListener('message', ({ data }) => {
         if (data.type === 'HYDROGEN_LOAD_ROOM') {
             navigation.push('room', data.payload.roomId);
         }
-    });
-
-    const hsApi = new HomeServerApi({
-        homeServer: sessionInfo.homeServer,
-        accessToken: sessionInfo.accessToken,
-        request: platform.request,
     });
 
     // receive a message to send to chat
