@@ -58,7 +58,7 @@ export function loadOrLoginHandler(navigation, sessionInfo, platform) {
         if (data.type === 'HYDROGEN_SEND_MESSAGE') {
             const { roomId, content } = data.payload;
             const eventType = 'm.room.message';
-            const txnId = undefined; // transaction id
+            const txnId = Date.now(); // transaction id
             const options = null;
             hsApi.send(
                 roomId,
