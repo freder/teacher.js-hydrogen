@@ -14,6 +14,7 @@ export function loadOrLoginHandler(navigation, sessionInfo, platform) {
         - lastUsed
         - userId
     */
+    console.log('fetching display name');
     fetch(
         `${sessionInfo.homeServer}/_matrix/client/r0/profile/${sessionInfo.userId}/displayname`,
         {
@@ -24,6 +25,8 @@ export function loadOrLoginHandler(navigation, sessionInfo, platform) {
     )
         .then((res) => res.json())
         .then(({ displayname }) => {
+            // TODO: check if in an iframe
+            console.log(displayname, 'posting...');
             window.parent.postMessage(
             // window.top.postMessage(
                 {
@@ -48,6 +51,7 @@ export function loadOrLoginHandler(navigation, sessionInfo, platform) {
 
     // receive room id from parent window + load it
     window.addEventListener('message', ({ data }) => {
+        console.log('received message', data);
         if (data.type === 'HYDROGEN_LOAD_ROOM') {
             navigation.push('room', data.payload.roomId);
         } else if (data.type === 'HYDROGEN_SEND_MESSAGE') {
