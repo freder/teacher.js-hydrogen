@@ -50,12 +50,7 @@ export function loadOrLoginHandler(navigation, sessionInfo, platform) {
     window.addEventListener('message', ({ data }) => {
         if (data.type === 'HYDROGEN_LOAD_ROOM') {
             navigation.push('room', data.payload.roomId);
-        }
-    });
-
-    // receive a message to send to chat
-    window.addEventListener('message', ({ data }) => {
-        if (data.type === 'HYDROGEN_SEND_MESSAGE') {
+        } else if (data.type === 'HYDROGEN_SEND_MESSAGE') {
             const { roomId, content } = data.payload;
             const eventType = 'm.room.message';
             const txnId = Date.now(); // transaction id
