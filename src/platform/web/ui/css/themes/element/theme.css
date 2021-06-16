@@ -60,7 +60,9 @@ limitations under the License.
 .logo {
     height: 48px;
     min-width: 48px;
-    background-image: url('element-logo.svg');
+    /* background-image: url('element-logo.svg'); */
+    background-image: url('teacher-solar-logo.svg');
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
 }
