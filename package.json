@@ -11,7 +11,7 @@
     "lint-ci": "eslint src/",
     "test": "impunity --entry-point src/main.js --force-esm-dirs lib/ src/",
     "start": "node scripts/serve-local.js",
-    "build": "node --experimental-modules scripts/build.mjs",
+    "build": "node --experimental-modules scripts/build.mjs ; npx babel --no-babelrc --out-dir ./target --plugins=@babel/plugin-proposal-optional-chaining ./target/*.js",
     "postinstall": "node ./scripts/post-install.js"
   },
   "repository": {
@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/vector-im/hydrogen-web/#readme",
   "devDependencies": {
+    "@babel/cli": "^7.14.5",
     "@babel/core": "^7.11.1",
     "@babel/preset-env": "^7.11.0",
     "@rollup/plugin-babel": "^5.1.0",
