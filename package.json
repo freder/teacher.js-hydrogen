@@ -11,7 +11,7 @@
     "lint-ci": "eslint src/",
     "test": "impunity --entry-point src/main.js --force-esm-dirs lib/ src/",
     "start": "node scripts/serve-local.js",
-    "build": "node --experimental-modules scripts/build.mjs ; npx babel --no-babelrc --out-dir ./target --plugins=@babel/plugin-proposal-optional-chaining ./target/*.js",
+    "build": "node --experimental-modules scripts/build.mjs ; npx babel --config-file=./scripts/teacher-solar.babel.config.js --out-dir ./target ./target/*.js",
     "postinstall": "node ./scripts/post-install.js"
   },
   "repository": {
