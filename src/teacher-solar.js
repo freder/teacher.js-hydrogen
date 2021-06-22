@@ -37,6 +37,7 @@ export function loadOrLoginHandler(navigation, sessionInfo, platform) {
             );
         })
         .catch((err) => {
+            alert('failed to fetch display name');
             console.error(err);
         });
 
