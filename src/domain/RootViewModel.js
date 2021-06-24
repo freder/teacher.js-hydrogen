@@ -74,7 +74,6 @@ export class RootViewModel extends ViewModel {
                         this.navigation.push("login");
                     } else if (sessionInfos.length === 1) {
                         this.navigation.push("session", sessionInfos[0].id);
-                        loadOrLoginHandler(this.navigation, sessionInfos[0], this.platform);
                     } else {
                         this.navigation.push("session");
                     }
@@ -112,22 +111,24 @@ export class RootViewModel extends ViewModel {
                     // won't be using the correct navigation base path.
                     this._pendingSessionContainer = sessionContainer;
                     this.navigation.push("session", sessionContainer.sessionId);
-
-                    // TODO: there must be a better way
-                    const sessionInfoStr = localStorage.getItem(
-                        sessionContainer._platform.sessionInfoStorage._name
-                    );
-                    const sessionInfo = JSON.parse(sessionInfoStr)[0];
-                    loadOrLoginHandler(this.navigation, sessionInfo, this.platform);
                 },
             }));
         });
     }
 
     _showSession(sessionContainer) {
-        this._setSection(() => {
+        this._setSection(async () => {
             this._sessionViewModel = new SessionViewModel(this.childOptions({sessionContainer}));
             this._sessionViewModel.start();
+
+            // get ahold of the session info (after login or restoring
+            // an existing session)
+            const {
+                _sessionId: sessionId,
+                _platform: platform,
+            } = sessionContainer;
+            const sessionInfo = await platform.sessionInfoStorage.get(sessionId);
+            loadOrLoginHandler(this.navigation, sessionInfo, platform)
         });
     }
 
